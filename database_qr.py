@@ -1,0 +1,15 @@
+import sqlite3
+
+def init_db():
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT UNIQUE,
+            password TEXT,
+            totp_secret TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
